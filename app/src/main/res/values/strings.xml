@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Camera</string>
+    <string name="app_name">Camera, Activities and Fragments</string>
+    <string name="text_message">Text Message</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="save">SAVE</string>
+    <string name="image">Image</string>
 </resources>
