@@ -1,25 +1,38 @@
-package cosw.eci.edu.camera;
+package cosw.eci.edu.camera.controller;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import cosw.eci.edu.camera.R;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
+
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+
+
+import cosw.eci.edu.camera.model.Post;
+
+public class MainActivity extends AppCompatActivity implements NewPostFragment.OnFragmentInteractionListener{
+
+    /*public static final String EXTRA_MESSAGE = "cosw.eci.edu.camera.MESSAGE";
     private static final String TAKE_PHOTO = "Take Photo";
     private static final int TAKE_PHOTO_OPTION = 1;
 
@@ -27,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
     private static final int CHOOSE_GALLERY_OPTION = 2;
 
     private static final String CANCEL = "Cancel";
-    private boolean isImagenValid = false;
+    private boolean isImagenValid = false;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        showFragment(new NewPostFragment(), true);
+
     }
 
-    public void addPhoto(View view) {
+   /* public void addPhoto(View view) {
         final CharSequence[] options = {TAKE_PHOTO, CHOOSE_GALLERY, CANCEL};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Add Photo!");
@@ -94,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return res;
     }
 
-    public void save(View view) {
+    public void post(View view) {
         EditText editText = (EditText) findViewById(R.id.txt_message);
         ImageView image = (ImageView) findViewById(R.id.imageView);
         if (editText.length() == 0) {
@@ -108,16 +124,47 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             Log.i("INFO", "ENTRO ACA");
-           /*Intent intent = new Intent(this, DisplayMessageActivity.class);
-                Post message = new Post();
-                message.setText(editText.getText().toString());
+            Intent intent = new Intent(this, PostActivity.class);
+            Post post = new Post();
+            post.setMessage(editText.getText().toString());
 
-                Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-                String photo = Encoding.encodeToBase64(bitmap, Bitmap.CompressFormat.PNG, 0);
-                message.setPhoto(photo);
+            Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+            String photo = encodeToBase64(bitmap, Bitmap.CompressFormat.PNG, 0);
+            post.setPhoto(photo);
 
-                intent.putExtra(EXTRA_MESSAGE, message);
-                startActivity(intent);*/
+            intent.putExtra(EXTRA_MESSAGE, post);
+            startActivity(intent);
         }
+    }
+
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }*/
+
+
+
+    public void showFragment(Fragment fragment, boolean addToBackStack){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        String tag = fragment.getClass().getSimpleName();
+        if ( addToBackStack )
+        {
+            transaction.addToBackStack( tag );
+        }
+        transaction.replace( R.id.fragment_container, fragment, tag );
+        transaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

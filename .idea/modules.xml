@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Camera.iml" filepath="$PROJECT_DIR$/Camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/COSWLab8AndroidCamera.iml" filepath="$PROJECT_DIR$/COSWLab8AndroidCamera.iml" />
+      <module fileurl="file://C:\Users\Administrador\Documents\NetBeansProjects\Android\Lab8Intents\COSWLab8AndroidCamera\Camera.iml" filepath="C:\Users\Administrador\Documents\NetBeansProjects\Android\Lab8Intents\COSWLab8AndroidCamera\Camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Administrador\Documents\NetBeansProjects\Android\Lab8Intents\COSWLab8AndroidCamera\app\app.iml" filepath="C:\Users\Administrador\Documents\NetBeansProjects\Android\Lab8Intents\COSWLab8AndroidCamera\app\app.iml" />
     </modules>
   </component>
 </project>
